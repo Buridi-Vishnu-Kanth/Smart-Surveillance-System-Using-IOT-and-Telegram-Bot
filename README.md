@@ -1,4 +1,4 @@
 # Smart Surveillance System Using IOT and Telegram Bot
 
-# Install the Additional boards manager URLs
-https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+# Arduino step by step Processes Installation
+[Arduino.pdf](https://github.com/user-attachments/files/18276012/Arduino.pdf)
