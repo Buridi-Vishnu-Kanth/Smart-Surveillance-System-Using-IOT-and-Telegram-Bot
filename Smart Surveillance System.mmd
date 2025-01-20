@@ -1,38 +1,59 @@
 flowchart TD
-    A[Start]:::start --> B[Initialize ESP32-CAM]:::camera
-    B --> C[Initialize BME280 Sensor]:::sensor
-    B --> D[Initialize PIR Motion Sensor]:::motion
-    B --> E[Connect to Wi-Fi]:::wifi
-    E --> F[Set up Telegram Bot]:::telegram
-    
-    F --> G{User  Interaction}:::user
-    G -->|Request Photo| H[Capture Photo from ESP32-CAM]:::camera
-    G -->|Request Sensor Readings| I[Read Temperature and Humidity from BME280]:::sensor
-    G -->|Receive Motion Alert| J[Send Alert to User via Telegram]:::alert
-    
-    H --> K[Send Photo to User]:::send
-    I --> L[Send Sensor Readings to User]:::send
-    
-    D --> M{Motion Detected?}:::check
-    M -->|Yes| J
-    M -->|No| N[Wait for Motion Detection]:::wait
-    
+    A["Start"] --> B["Initialize ESP32-CAM"]
+    B --> C["Initialize BME280 Sensor"] & D["Initialize PIR Motion Sensor"] & E["Connect to Wi-Fi"]
+    E --> F["Set up Telegram Bot"]
+    F --> G{"User Interaction"}
+    G -- Request Photo --> H["Capture Photo from ESP32-CAM"]
+    G -- Request Sensor Readings --> I["Read Temperature and Humidity from BME280"]
+    G -- Receive Motion Alert --> J["Send Alert to User via Telegram"]
+    H --> K["Send Photo to User"]
+    I --> L["Send Sensor Readings to User"]
+    D --> M{"Motion Detected?"}
+    M -- Yes --> J
+    M -- No --> N["Wait for Motion Detection"]
     N --> M
     K --> G
     L --> G
     J --> G
-    
-    G --> O[End of Process]:::end
-
-    classDef start fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef camera fill:#ffcc00,stroke:#333,stroke-width:2px;
-    classDef sensor fill:#66ccff,stroke:#333,stroke-width:2px;
-    classDef motion fill:#ff6666,stroke:#333,stroke-width:2px;
-    classDef wifi fill:#99ff99,stroke:#333,stroke-width:2px;
-    classDef telegram fill:#cc99ff,stroke:#333,stroke-width:2px;
-    classDef user fill:#ffcc99,stroke:#333,stroke-width:2px;
-    classDef alert fill:#ff9999,stroke:#333,stroke-width:2px;
-    classDef send fill:#ffff99,stroke:#333,stroke-width:2px;
-    classDef check fill:#ffccff,stroke:#333,stroke-width:2px;
-    classDef wait fill:#cccccc,stroke:#333,stroke-width:2px;
-    classDef end fill:#ffb3b3,stroke:#333,stroke-width:2px;
+    G --> O["End of Process"]
+     A:::start
+     A:::rounded
+     B:::camera
+     B:::rounded
+     C:::sensor
+     C:::rounded
+     D:::motion
+     D:::rounded
+     E:::wifi
+     E:::rounded
+     F:::telegram
+     F:::rounded
+     G:::user
+     H:::camera
+     H:::rounded
+     I:::sensor
+     I:::rounded
+     J:::alert
+     J:::rounded
+     K:::send
+     K:::rounded
+     L:::send
+     L:::rounded
+     M:::check
+     N:::wait
+     N:::rounded
+     O:::processEnd
+     O:::rounded
+    classDef rounded fill:,stroke:#333,stroke-width:2px,rx:10px,ry:10px
+    classDef start fill:#f9f,stroke:#333,stroke-width:2px
+    classDef camera fill:#ffcc00,stroke:#333,stroke-width:2px
+    classDef sensor fill:#66ccff,stroke:#333,stroke-width:2px
+    classDef motion fill:#ff6666,stroke:#333,stroke-width:2px
+    classDef wifi fill:#99ff99,stroke:#333,stroke-width:2px
+    classDef telegram fill:#cc99ff,stroke:#333,stroke-width:2px
+    classDef user fill:#ffcc99,stroke:#333,stroke-width:2px
+    classDef alert fill:#ff9999,stroke:#333,stroke-width:2px
+    classDef send fill:#ffff99,stroke:#333,stroke-width:2px
+    classDef check fill:#ffccff,stroke:#333,stroke-width:2px
+    classDef wait fill:#cccccc,stroke:#333,stroke-width:2px
+    classDef processEnd fill:#ffb3b3,stroke:#333,stroke-width:2px
